@@ -1,7 +1,7 @@
 # Assignment 1: Imitation Learning
 
 ## Due Date
-2/18/2025 at 11:59PM EST (Both programming and written parts).
+2/20/2025 at 11:59PM EST (Both programming and written parts).
 
 ## Getting Started
 ### Programming
