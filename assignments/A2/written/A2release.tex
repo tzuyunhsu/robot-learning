@@ -154,13 +154,16 @@ $$\sum^{\infty}_{k=1}k\alpha^{k-1} = \frac{d}{d\alpha}\sum^{\infty}_{k=1}\alpha^
 \noindent Previously, we saw how acting greedily with an approximate value function can result in a \emph{worse} policy. Instead, what if we use the approximate value function to \emph{shape the reward}? 
 \newline
 
+\noindent Consider an infinite-horizon Markov Decision Process (MDP) with discount factor $\gamma$. We have a reference policy $\pi$ with a true value function $V^\pi(s)$. To approximate this function, we collect rollouts using $\pi$ and fit a neural network to estimate the value function, yielding $\hat V(s) \approx V^\pi(s)$, with an approximation error bounded by $\epsilon$. Formally, we assume:
 
-\noindent Let's define a \emph{reward bonus} using the approximate value function from Q2. 
+$$ || V^\pi - \hat V||_{\infty} \leq \epsilon. $$
+
+\noindent Now, we define a \emph{reward bonus} using this approximate value function:
 
 $$F(s,s') = \gamma \hat V(s') - \hat V(s)$$
 
-\noindent This extra reward is gained whenever we transition from state $s$ to state $s'$. 
-Informally, we are giving a small intermediate reward for moving toward states of higher value. Adding these intermediate rewards helps in speeding up a policy's convergence in environments with sparse rewards.
+\noindent This additional reward is given whenever the agent transitions from state $s$ to state $s'$. 
+Informally, it provides a small intermediate reward for moving toward states of higher estimated value. By adding these intermediate rewards, we aim to accelerate policy convergence, especially in environments with sparse rewards.
 
 \noindent At each step $i$ of an episode, the shaped reward $R_i$ is then defined as
 $$R_i = r_i + F(s_i,s_{i+1})$$
